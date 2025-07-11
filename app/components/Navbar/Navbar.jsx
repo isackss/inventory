@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-between p-4 bg-gray-800 text-white">
+    <nav className="flex items-center justify-between p-4 bg-gray-800 text-white mb-4">
       <div>Project Inventory</div>
       <ul className="flex space-x-4">
         <Link href="/">

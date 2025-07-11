@@ -1,11 +1,25 @@
 "use client";
 
-const page = () => {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold my-5">Departamentos</h1>
+import { useState } from "react";
 
-      <form className="flex flex-col gap-4 ">
+const page = () => {
+  const [departments, setDepartments] = useState([]);
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    setDepartments([...departments, data]);
+    e.target.reset();
+  };
+
+  return (
+    <div className="p-4 border border-gray-300 shadow-md rounded-md">
+      <h1 className="text-2xl font-bold border-b border-gray-300 mb-4 p-2">
+        Crear Departamentos
+      </h1>
+
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-row gap-4 items-center">
           <label htmlFor="id">Código:</label>
           <input
@@ -14,7 +28,7 @@ const page = () => {
             name="id"
             placeholder="Enter department ID"
             required
-            className="border p-2 rounded w-full"
+            className="border-gray-300 border p-2 rounded w-full"
           />
         </div>
         <div className="flex flex-row gap-4 items-center">
@@ -25,7 +39,7 @@ const page = () => {
             name="description"
             placeholder="Enter department description"
             required
-            className="border p-2 rounded w-full"
+            className="border-gray-300 border p-2 rounded w-full"
           />
         </div>
         <div className="flex flex-row gap-4 items-center">
@@ -36,7 +50,7 @@ const page = () => {
             name="details"
             placeholder="Enter department details"
             required
-            className="border p-2 rounded w-full"
+            className="border border-gray-300 p-2 rounded w-full"
           />
         </div>
         <div className="flex flex-row gap-4 items-center">
@@ -58,6 +72,26 @@ const page = () => {
           </button>
         </div>
       </form>
+      <div className="mt-8">
+        <h2 className="text-xl font-bold border-b border-gray-300 p-2">
+          Lista de Departamentos
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+          {departments.length === 0 && (
+            <p className="text-gray-500">No hay departamentos creados.</p>
+          )}
+          {departments.map((dept, index) => (
+            <div
+              key={index}
+              className="border border-gray-300 p-4 rounded-md shadow-md"
+            >
+              <h3 className="font-bold">{dept.id}</h3>
+              <p>Descripción: {dept.description}</p>
+              <p>Detalles: {dept.details}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
