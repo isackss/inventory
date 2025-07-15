@@ -1,15 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect } from "react";
+
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const page = () => {
-  const [departments, setDepartments] = useState([]);
+  const [departments, setDepartments] = useLocalStorage("departments", []);
+  // Load departments from localStorage when the component mounts
+
+  useEffect(() => {
+    const loadDepartments = () => {
+      const storedDepartments = localStorage.getItem("departments");
+      if (storedDepartments) {
+        setDepartments(JSON.parse(storedDepartments));
+      }
+    };
+    loadDepartments();
+  }, []);
+
+  // Update localStorage whenever departments change
+  useEffect(() => {
+    localStorage.setItem("departments", JSON.stringify(departments));
+  }, [departments]);
+
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    setDepartments([...departments, data]);
+    setDepartments((prev) => [...prev, data]);
     e.target.reset();
   };
 
