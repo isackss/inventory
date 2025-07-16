@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import Sidebar from "../Sidebar/Sidebar";
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <nav className="flex items-center justify-between p-4 bg-gray-900 text-white mb-4">
       <div className="flex items-center space-x-2">
@@ -18,7 +19,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <ul className="flex space-x-4">
+      <ul className="sm:flex space-x-4 hidden">
         <Link href="/">
           <li>Home</li>
         </Link>
@@ -32,8 +33,7 @@ const Navbar = () => {
           <li>Clients</li>
         </Link>
       </ul>
+      <Sidebar />
     </nav>
   );
 };
-
-export default Navbar;
