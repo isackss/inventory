@@ -1,9 +1,23 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-between p-4 bg-gray-800 text-white mb-4">
-      <div>Project Inventory</div>
+    <nav className="flex items-center justify-between p-4 bg-gray-900 text-white mb-4">
+      <div className="flex items-center space-x-2">
+        <Image
+          src="/assets/img/logo.png"
+          alt="Project Logo"
+          width={50}
+          height={50}
+        />
+        <div>
+          <div>Project Inventory</div>
+          <div className="text-xs text-gray-300">
+            Manage your inventory efficiently
+          </div>
+        </div>
+      </div>
       <ul className="flex space-x-4">
         <Link href="/">
           <li>Home</li>

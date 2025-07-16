@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useLocalStorage(key, initialValue) {
+export const useLocalStorage = (key, initialValue) => {
   // Estado para almacenar el valor.
   // Inicializa el estado con el valor del localStorage o el initialValue
   const [storedValue, setStoredValue] = useState(() => {
@@ -28,6 +28,4 @@ function useLocalStorage(key, initialValue) {
   }, [key, storedValue]);
 
   return [storedValue, setStoredValue];
-}
-
-export default useLocalStorage;
+};
